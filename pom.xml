@@ -1,0 +1,313 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.mig</groupId>
+    <artifactId>parent-spring</artifactId>
+    <version>10.1.0-SNAPSHOT</version>
+    <name>The root maven POM artifact for MIG Projects</name>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>2.2.4.RELEASE</version>
+	<relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <scm>
+        <connection>scm:git:https://vcs.mig-frankfurt.de/MIG/</connection>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.maven.plugin.annotations>3.6.0</version.maven.plugin.annotations>
+        <version.maven.plugin.api>3.6.2</version.maven.plugin.api>
+        <version.maven.plugin.assembly>3.1.1</version.maven.plugin.assembly>
+        <version.maven.plugin.rat>0.13</version.maven.plugin.rat>
+        <version.maven.plugin.dependency>3.1.1</version.maven.plugin.dependency>
+        <version.maven.plugin.buildnumber>1.4</version.maven.plugin.buildnumber>
+        <version.maven.plugin.war>3.2.3</version.maven.plugin.war>
+        <version.maven.plugin.jar>3.1.2</version.maven.plugin.jar>
+        <version.maven.plugin.compiler>3.8.1</version.maven.plugin.compiler>
+        <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
+        <version.maven.plugin.surefire>2.22.2</version.maven.plugin.surefire>
+        <version.maven.plugin.source>3.1.0</version.maven.plugin.source>
+        <version.maven.plugin.site>3.8.2</version.maven.plugin.site>
+        <version.maven.plugin.wagon-webdav-jackrabbit>3.3.3</version.maven.plugin.wagon-webdav-jackrabbit>
+        <version.maven.plugin.javadoc>3.1.1</version.maven.plugin.javadoc>
+        <version.maven.plugin.enforcer>1.4.1</version.maven.plugin.enforcer>
+        <version.maven.plugin.checkstyle>3.1.0</version.maven.plugin.checkstyle>
+
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+        <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
+    </properties>
+
+    <organization>
+        <name>Medical Informatics Group (MIG) Frankfurt</name>
+    </organization>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Maven Plugin Development -->
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>${version.maven.plugin.api}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${version.maven.plugin.annotations}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <!-- Those plugins are optional and are not included as dependencies by default -->
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${version.maven.plugin.assembly}</version>
+                </plugin>
+
+                <!--release audit tool-->
+                <plugin>
+                    <groupId>org.apache.rat</groupId>
+                    <artifactId>apache-rat-plugin</artifactId>
+                    <version>${version.maven.plugin.rat}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.maven.plugin.checkstyle}</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+
+        <plugins>
+            <!-- Includes the build variables like the branch and more as maven variables -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>${version.maven.plugin.buildnumber}</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <shortRevisionLength>10</shortRevisionLength>
+                </configuration>
+            </plugin>
+
+            <!-- Includes various variables into the MANIFEST.MF file for war projects -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.maven.plugin.war}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <SCM-Version>${buildNumber}</SCM-Version>
+                            <SCM-Branch>${scmBranch}</SCM-Branch>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Includes various variables into the MANIFEST.MF file for jar projects -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${version.maven.plugin.jar}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
+                            <SCM-Version>${buildNumber}</SCM-Version>
+                            <SCM-Branch>${scmBranch}</SCM-Branch>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.maven.plugin.compiler}</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${version.maven.plugin.release}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${version.maven.plugin.surefire}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${version.maven.plugin.source}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${version.maven.plugin.site}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.wagon</groupId>
+                        <artifactId>wagon-webdav-jackrabbit</artifactId>
+                        <version>${version.maven.plugin.wagon-webdav-jackrabbit}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${version.maven.plugin.javadoc}</version>
+            </plugin>
+
+            <!-- This plugin allows to check for snapshot dependencies for release version! -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${version.maven.plugin.enforcer}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${version.maven.plugin.dependency}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>validate</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>${version.maven.plugin.enforcer}</version>
+                        <configuration>
+                            <rules>
+                                <requireReleaseDeps>
+                                    <onlyWhenRelease>true</onlyWhenRelease>
+                                    <message>No Snapshots Allowed!</message>
+                                </requireReleaseDeps>
+                            </rules>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${version.maven.plugin.checkstyle}</version>
+                        <configuration>
+                            <configLocation>google_checks.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                            <linkXRef>false</linkXRef>
+                            <violationSeverity>warning</violationSeverity>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>validate</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${version.maven.plugin.dependency}</version>
+                        <executions>
+                            <execution>
+                                <id>analyze</id>
+                                <goals>
+                                    <goal>analyze-only</goal>
+                                </goals>
+                                <configuration>
+                                    <failOnWarning>true</failOnWarning>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>mig-maven-repo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <distributionManagement>
+                <repository>
+                    <id>mig-maven</id>
+                    <url>https://repo.mig-frankfurt.de/repository/oss-release/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>mig-maven</id>
+                    <url>https://repo.mig-frankfurt.de/repository/oss-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+
+    </profiles>
+
+</project>
