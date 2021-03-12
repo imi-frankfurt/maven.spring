@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.mig</groupId>
     <artifactId>parent-spring</artifactId>
-    <version>10.1.0-SNAPSHOT</version>
+    <version>10.1.0</version>
     <name>The root maven POM artifact for MIG Projects</name>
     <packaging>pom</packaging>
     <parent>
@@ -154,8 +154,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${version.maven.plugin.compiler}</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
@@ -275,15 +275,17 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <version>${version.maven.plugin.dependency}</version>
+                        <configuration>
+                            <ignoredUnusedDeclaredDependencies>
+                                <ignoredUnusedDeclaredDependency>org.projectlombok:lombok</ignoredUnusedDeclaredDependency>
+                            </ignoredUnusedDeclaredDependencies>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>analyze</id>
                                 <goals>
                                     <goal>analyze-only</goal>
                                 </goals>
-                                <configuration>
-                                    <failOnWarning>true</failOnWarning>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
