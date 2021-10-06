@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.mig</groupId>
     <artifactId>parent-spring</artifactId>
-    <version>10.2.0</version>
+    <version>11.0.0</version>
     <name>The root maven POM artifact for MIG Projects</name>
     <packaging>pom</packaging>
     <parent>
-        <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.13.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>org.springframework.boot</groupId>
+        <relativePath/>
+        <version>2.5.5</version> <!-- lookup parent from repository -->
     </parent>
 
     <scm>
@@ -21,21 +21,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.maven.plugin.annotations>3.6.0</version.maven.plugin.annotations>
         <version.maven.plugin.api>3.6.2</version.maven.plugin.api>
-        <version.maven.plugin.assembly>3.1.1</version.maven.plugin.assembly>
+        <version.maven.plugin.assembly>3.3.0</version.maven.plugin.assembly>
         <version.maven.plugin.rat>0.13</version.maven.plugin.rat>
-        <version.maven.plugin.dependency>3.1.1</version.maven.plugin.dependency>
+        <version.maven.plugin.dependency>3.2.0</version.maven.plugin.dependency>
         <version.maven.plugin.buildnumber>1.4</version.maven.plugin.buildnumber>
-        <version.maven.plugin.war>3.2.3</version.maven.plugin.war>
-        <version.maven.plugin.jar>3.1.2</version.maven.plugin.jar>
+        <version.maven.plugin.war>3.3.2</version.maven.plugin.war>
+        <version.maven.plugin.jar>3.2.0</version.maven.plugin.jar>
         <version.maven.plugin.compiler>3.8.1</version.maven.plugin.compiler>
-        <version.maven.plugin.release>2.5.3</version.maven.plugin.release>
-        <version.maven.plugin.surefire>2.22.2</version.maven.plugin.surefire>
-        <version.maven.plugin.source>3.1.0</version.maven.plugin.source>
-        <version.maven.plugin.site>3.8.2</version.maven.plugin.site>
+        <version.maven.plugin.release>3.0.0-M4</version.maven.plugin.release>
+        <version.maven.plugin.surefire>3.0.0-M5</version.maven.plugin.surefire>
+        <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
+        <version.maven.plugin.site>3.9.1</version.maven.plugin.site>
         <version.maven.plugin.wagon-webdav-jackrabbit>3.3.3</version.maven.plugin.wagon-webdav-jackrabbit>
-        <version.maven.plugin.javadoc>3.1.1</version.maven.plugin.javadoc>
-        <version.maven.plugin.enforcer>1.4.1</version.maven.plugin.enforcer>
-        <version.maven.plugin.checkstyle>3.1.0</version.maven.plugin.checkstyle>
+        <version.maven.plugin.javadoc>3.3.1</version.maven.plugin.javadoc>
+        <version.maven.plugin.enforcer>3.0.0</version.maven.plugin.enforcer>
+        <version.maven.plugin.checkstyle>3.1.2</version.maven.plugin.checkstyle>
+        <version.maven.plugin.version>2.8.1</version.maven.plugin.version>
 
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
@@ -208,12 +209,33 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>${version.maven.plugin.enforcer}</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6.3</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <id>enforce-maven</id>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${version.maven.plugin.dependency}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${version.maven.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -227,25 +249,25 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
-                        <version>${version.maven.plugin.enforcer}</version>
                         <configuration>
                             <rules>
                                 <requireReleaseDeps>
-                                    <onlyWhenRelease>true</onlyWhenRelease>
                                     <message>No Snapshots Allowed!</message>
+                                    <onlyWhenRelease>true</onlyWhenRelease>
                                 </requireReleaseDeps>
                             </rules>
                         </configuration>
                         <executions>
                             <execution>
-                                <phase>verify</phase>
                                 <goals>
                                     <goal>enforce</goal>
                                 </goals>
+                                <phase>verify</phase>
                             </execution>
                         </executions>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <version>${version.maven.plugin.enforcer}</version>
                     </plugin>
 
                     <plugin>

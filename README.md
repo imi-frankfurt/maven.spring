@@ -12,7 +12,7 @@ For example:
 Insert the `scm connection` setting into the `<project>` tag of your pom.xml.
 
 If you have an organization with multiple projects that all require the same `scm connection` setting and maybe also share other settings please create a new parent pom.xml for them.  
-For example see https://github.com/mig-frankfurt/mdr.maven.spring
+For example see https://github.com/mig-frankfurt/dataelementhub.maven.spring
 
 # Content
 
