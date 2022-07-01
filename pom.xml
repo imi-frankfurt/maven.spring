@@ -3,18 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.mig</groupId>
     <artifactId>parent-spring</artifactId>
-    <version>11.1.0</version>
+    <version>11.2.0</version>
     <name>The root maven POM artifact for MIG Projects</name>
     <packaging>pom</packaging>
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
         <relativePath/>
-        <version>2.6.7</version> <!-- lookup parent from repository -->
+        <version>2.7.1</version> <!-- lookup parent from repository -->
     </parent>
 
     <scm>
-        <connection>scm:git:https://vcs.mig-frankfurt.de/MIG/</connection>
+        <connection>scm:git:https://github.com/mig-frankfurt/</connection>
     </scm>
 
     <properties>
