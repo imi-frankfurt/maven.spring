@@ -6,13 +6,13 @@ To use this pom.xml as a parent please overwrite the `scm connection` setting wi
 For example:
 ```
 <scm>
-    <connection>scm:git:https://github.com/mig-frankfurt/</connection>
+    <connection>scm:git:https://github.com/imi-frankfurt/</connection>
 </scm>
 ```
 Insert the `scm connection` setting into the `<project>` tag of your pom.xml.
 
 If you have an organization with multiple projects that all require the same `scm connection` setting and maybe also share other settings please create a new parent pom.xml for them.  
-For example see https://github.com/mig-frankfurt/dataelementhub.maven.spring
+For example see https://github.com/imi-frankfurt/dataelementhub.maven.spring
 
 # Content
 
