@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.mig</groupId>
     <artifactId>parent-spring</artifactId>
-    <version>11.4.0</version>
+    <version>12.0.0</version>
     <name>The root maven POM artifact for IMI Frankfurt Projects</name>
     <packaging>pom</packaging>
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
         <relativePath/>
-        <version>2.7.8</version> <!-- lookup parent from repository -->
+        <version>3.0.2</version> <!-- lookup parent from repository -->
     </parent>
 
     <scm>
@@ -31,7 +31,7 @@
         <version.maven.plugin.release>3.0.0-M7</version.maven.plugin.release>
         <version.maven.plugin.surefire>3.0.0-M8</version.maven.plugin.surefire>
         <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
-        <version.maven.plugin.site>3.12.1</version.maven.plugin.site>
+        <version.maven.plugin.site>4.0.0-M4</version.maven.plugin.site>
         <version.maven.plugin.wagon-webdav-jackrabbit>3.5.3</version.maven.plugin.wagon-webdav-jackrabbit>
         <version.maven.plugin.javadoc>3.4.1</version.maven.plugin.javadoc>
         <version.maven.plugin.enforcer>3.1.0</version.maven.plugin.enforcer>
