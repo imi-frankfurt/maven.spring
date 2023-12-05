@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.mig</groupId>
     <artifactId>parent-spring</artifactId>
-    <version>12.0.0</version>
+    <version>13.0.0</version>
     <name>The root maven POM artifact for IMI Frankfurt Projects</name>
     <packaging>pom</packaging>
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
         <relativePath/>
-        <version>3.0.2</version> <!-- lookup parent from repository -->
+        <version>3.2.0</version> <!-- lookup parent from repository -->
     </parent>
 
     <scm>
@@ -19,25 +19,25 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.maven.plugin.annotations>3.7.1</version.maven.plugin.annotations>
-        <version.maven.plugin.api>3.8.7</version.maven.plugin.api>
-        <version.maven.plugin.assembly>3.4.2</version.maven.plugin.assembly>
+        <version.maven.plugin.annotations>3.10.2</version.maven.plugin.annotations>
+        <version.maven.plugin.api>3.9.6</version.maven.plugin.api>
+        <version.maven.plugin.assembly>3.6.0</version.maven.plugin.assembly>
         <version.maven.plugin.rat>0.15</version.maven.plugin.rat>
-        <version.maven.plugin.dependency>3.5.0</version.maven.plugin.dependency>
-        <version.maven.plugin.buildnumber>3.0.0</version.maven.plugin.buildnumber>
-        <version.maven.plugin.war>3.3.2</version.maven.plugin.war>
+        <version.maven.plugin.dependency>3.6.1</version.maven.plugin.dependency>
+        <version.maven.plugin.buildnumber>3.1.0</version.maven.plugin.buildnumber>
+        <version.maven.plugin.war>3.4.0</version.maven.plugin.war>
         <version.maven.plugin.jar>3.3.0</version.maven.plugin.jar>
-        <version.maven.plugin.compiler>3.10.1</version.maven.plugin.compiler>
-        <version.maven.plugin.release>3.0.0-M7</version.maven.plugin.release>
-        <version.maven.plugin.surefire>3.0.0-M8</version.maven.plugin.surefire>
-        <version.maven.plugin.source>3.2.1</version.maven.plugin.source>
-        <version.maven.plugin.site>4.0.0-M4</version.maven.plugin.site>
+        <version.maven.plugin.compiler>3.11.0</version.maven.plugin.compiler>
+        <version.maven.plugin.release>3.0.1</version.maven.plugin.release>
+        <version.maven.plugin.surefire>3.2.2</version.maven.plugin.surefire>
+        <version.maven.plugin.source>3.3.0</version.maven.plugin.source>
+        <version.maven.plugin.site>4.0.0-M12</version.maven.plugin.site>
         <version.maven.plugin.wagon-webdav-jackrabbit>3.5.3</version.maven.plugin.wagon-webdav-jackrabbit>
-        <version.maven.plugin.javadoc>3.4.1</version.maven.plugin.javadoc>
-        <version.maven.plugin.enforcer>3.1.0</version.maven.plugin.enforcer>
-        <version.maven.plugin.checkstyle>3.2.1</version.maven.plugin.checkstyle>
-        <version.checkstyle>10.6.0</version.checkstyle>
-        <version.maven.plugin.version>2.14.2</version.maven.plugin.version>
+        <version.maven.plugin.javadoc>3.6.3</version.maven.plugin.javadoc>
+        <version.maven.plugin.enforcer>3.4.1</version.maven.plugin.enforcer>
+        <version.maven.plugin.checkstyle>3.3.1</version.maven.plugin.checkstyle>
+        <version.checkstyle>10.12.5</version.checkstyle>
+        <version.maven.plugin.version>2.16.2</version.maven.plugin.version>
 
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
